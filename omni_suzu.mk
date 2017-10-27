@@ -15,15 +15,15 @@
 #
 
 # Inherit device configurations
-$(call inherit-product, device/sony/dora/device.mk)
+$(call inherit-product, device/sony/suzu/device.mk)
 
 # Device identification
-PRODUCT_DEVICE := dora
-PRODUCT_NAME := omni_dora
-PRODUCT_RELEASE_NAME := dora
+PRODUCT_DEVICE := suzu
+PRODUCT_NAME := omni_suzu
+PRODUCT_RELEASE_NAME := suzu
 PRODUCT_BRAND := Sony
 PRODUCT_MANUFACTURER := Sony
-PRODUCT_MODEL := F8131
+PRODUCT_MODEL := F5121
 
 # Prebuilt kernel
-LOCAL_KERNEL := device/sony/dora/prebuilts/kernel
+LOCAL_KERNEL := device/sony/suzu/prebuilts/kernel
