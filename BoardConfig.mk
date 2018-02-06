@@ -14,19 +14,13 @@
 # limitations under the License.
 #
 
-# Board device path
-DEVICE_PATH := device/sony/suzu
-
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := F5121
 
 # Platform
 TARGET_BOARD_PLATFORM := msm8952
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno510
-TARGET_POWERHAL_VARIANT := qcom
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_KERNEL := false
-TARGET_NO_RADIOIMAGE := true
 TARGET_NO_RECOVERY := false
 
 # Architecture
@@ -70,7 +64,7 @@ BOARD_KERNEL_CMDLINE += user_debug=31 androidboot.selinux=permissive
 BOARD_KERNEL_CMDLINE += msm_rtb.filter=0x3F ehci-hcd.park=3
 BOARD_KERNEL_CMDLINE += dwc3.maximum_speed=high dwc3_msm.prop_chg_detect=Y
 BOARD_KERNEL_CMDLINE += coherent_pool=8M
-BOARD_KERNEL_CMDLINE += androidboot.hardware=suzu
+BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom
 BOARD_KERNEL_CMDLINE += enforcing=0
 
 # Partitions
@@ -83,33 +77,26 @@ TARGET_USERIMAGES_USE_EXT4 := true
 # Recovery
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_HAS_LARGE_FILESYSTEM := true
-BOARD_HAS_NO_MISC_PARTITION := true
 TARGET_HW_DISK_ENCRYPTION := true
-TARGET_KERNEL_HAVE_EXFAT := true
-TARGET_KERNEL_HAVE_NTFS := true
 
 # 64 bits elements
 TARGET_USES_64_BIT_BINDER := true
 
 # TWRP configurations
-BOARD_HAS_NO_SELECT_BUTTON := true
 RECOVERY_SDCARD_ON_DATA := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
-TARGET_SKIP_SETEXECCON_VOLD_CHECK := true
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_CUSTOM_CPU_TEMP_PATH := /sys/class/thermal/thermal_zone4/temp
 TW_DEFAULT_BRIGHTNESS := 1023
 TW_EXCLUDE_SUPERSU := true
 TW_EXTRA_LANGUAGES := true
-TW_HAS_NO_RECOVERY_PARTITION := true
 TW_IGNORE_ABS_MT_TRACKING_ID := true
 TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_FUSE_EXFAT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_NEW_ION_HEAP := true
 TW_THEME := portrait_hdpi
+TARGET_RECOVERY_DEVICE_MODULES := tzdata
 
-# Recovery blobs
-TARGET_RECOVERY_DEVICE_MODULES := libbinder libgui libui libEGL libGLES_trace libGLESv2 libprotobuf-cpp-lite libsync
-TW_RECOVERY_ADDITIONAL_RELINK_FILES := $(OUT)/system/lib64/libbinder.so $(OUT)/system/lib64/libgui.so $(OUT)/system/lib64/libui.so $(OUT)/system/lib64/libEGL.so $(OUT)/system/lib64/libGLES_trace.so $(OUT)/system/lib64/libGLESv2.so $(OUT)/system/lib64/libprotobuf-cpp-lite.so $(OUT)/system/lib64/libsync.so
+# Workaround for error copying vendor files to recovery ramdisk
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_COPY_OUT_VENDOR := vendor
